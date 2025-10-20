@@ -21,16 +21,10 @@ spec:
     spec:
       containers:
       - name: ryu-rest
-        image: arturoalvarez/ryu-rest:1.0
+        image: arturoalvarez/ryu-rest:2.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           name: rest
         - containerPort: 6633
           name: ofp
-        readinessProbe:
-          httpGet:
-            path: /stats/switches
-            port: 8080
-          initialDelaySeconds: 3
-          periodSeconds: 5
