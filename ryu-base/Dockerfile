@@ -11,4 +11,4 @@ RUN pip install ./ryu
 EXPOSE 6633/tcp
 EXPOSE 8080/tcp
 
-CMD ["ryu-manager", "ryu.app.ofctl_rest", "ryu.app.simple_switch_13", "--ofp-tcp-listen-port", "6633", "--wsapi-host", "0.0.0.0", "--wsapi-port", "8080"]
+CMD ["ryu-manager", "--observe-links", "ryu.app.ofctl_rest", "ryu.app.simple_switch_13", "ryu.app.gui_topology.gui_topology", "--ofp-tcp-listen-port", "6633", "--wsapi-host", "0.0.0.0", "--wsapi-port", "8080"]

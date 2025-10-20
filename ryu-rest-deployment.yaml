@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: ryu-rest
-        image: arturoalvarez/ryu-rest:2.0
+        image: arturoalvarez/ryu-rest:3.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
