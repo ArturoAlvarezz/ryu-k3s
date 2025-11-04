@@ -4,7 +4,7 @@ metadata:
   name: ryu-rest
   namespace: ryu
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: ryu-rest
@@ -15,9 +15,9 @@ spec:
     spec:
       containers:
         - name: ryu-rest
-          image: docker.io/arturoalvarez/ryu-rest:3.0
-          command: ["python3"]
-          args: ["-m", "ryu.app.ofctl_rest_proxy"]
+          image: docker.io/arturoalvarez/ryu-rest:4.0
+          command: ["ryu-manager"]
+          args: ["ryu.app.ofctl_rest", "--wsapi-host", "0.0.0.0", "--wsapi-port", "8080"]
           env:
             - name: RYU_CORE_URL
               value: "http://ryu-core-svc:8080"

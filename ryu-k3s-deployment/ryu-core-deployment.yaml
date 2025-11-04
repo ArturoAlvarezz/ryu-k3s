@@ -13,6 +13,8 @@ spec:
       labels:
         app: ryu-core
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: nodo-k3s-maestro
       containers:
         - name: ryu-core
           image: docker.io/arturoalvarez/ryu-core:1.0
@@ -21,8 +23,11 @@ spec:
             [
               "--observe-links",
               "ryu.app.simple_switch_13",
-              "ryu.app.topology.switches",
-              "--ofp-tcp-listen-port", "6633"
+              "ryu.app.ofctl_rest",
+              "ryu.app.gui_topology.gui_topology",
+              "--ofp-tcp-listen-port", "6633",
+              "--wsapi-host", "0.0.0.0",
+              "--wsapi-port", "8080"
             ]
           ports:
             - containerPort: 6633
@@ -34,13 +39,15 @@ metadata:
   name: ryu-core-svc
   namespace: ryu
 spec:
+  type: NodePort
   selector:
     app: ryu-core
   ports:
     - name: openflow
       port: 6633
       targetPort: 6633
+      nodePort: 30266
     - name: internal-api
       port: 8080
       targetPort: 8080
-  clusterIP: 10.43.200.10  # puedes omitirlo si quieres que sea asignado automáticamente
+      nodePort: 31699
