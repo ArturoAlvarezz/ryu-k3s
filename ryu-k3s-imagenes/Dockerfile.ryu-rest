@@ -1,0 +1,24 @@
+# Imagen base ligera con Python
+FROM python:3.8-slim
+
+# Evitar prompts interactivos
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git build-essential python3-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Clonar e instalar Ryu desde el repositorio oficial
+WORKDIR /opt
+RUN git clone https://github.com/faucetsdn/ryu.git
+RUN pip install ./ryu
+
+# Puerto de la API REST
+EXPOSE 8080
+
+# Variable para apuntar al Ryu Core
+ENV RYU_CORE_URL=http://ryu-core-svc:8080
+
+# Comando de inicio: lanza el servidor REST que se conecta al Core
+CMD ["ryu-manager", "ryu.app.ofctl_rest", "--wsapi-host", "0.0.0.0", "--wsapi-port", "8080"]
