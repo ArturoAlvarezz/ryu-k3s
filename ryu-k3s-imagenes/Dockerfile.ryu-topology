@@ -1,0 +1,29 @@
+FROM python:3.8-slim
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Clonar e instalar Ryu
+RUN git clone https://github.com/ArturoAlvarezz/ryu-k8s.git /ryu
+WORKDIR /ryu
+
+# Instalar Ryu y dependencias
+RUN pip install --no-cache-dir .
+
+# Instalar Redis client
+RUN pip install --no-cache-dir redis hiredis
+
+# Crear usuario no-root
+RUN useradd -m -u 1000 ryu && \
+    chown -R ryu:ryu /ryu
+
+USER ryu
+
+# Puerto HTTP
+EXPOSE 8080
+
+# Comando por defecto - GUI Topology + REST Topology + WS Topology
+CMD ["ryu-manager", "--observe-links", "ryu.app.gui_topology.gui_topology", "ryu.app.rest_topology", "ryu.app.ws_topology", "--wsapi-host", "0.0.0.0", "--wsapi-port", "8080"]

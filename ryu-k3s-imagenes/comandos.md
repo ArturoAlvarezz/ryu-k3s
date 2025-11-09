@@ -1,22 +1,28 @@
 # Comandos para subir imagenes
 
-## Ryu Core
+## Ryu OFCTL
 
 ```bash
-docker build -f Dockerfile.ryu-core -t arturoalvarez/ryu-core:latest .
-docker push arturoalvarez/ryu-core:latest
+docker build -f ./ryu-k3s-imagenes/Dockerfile.ryu-ofctl -t arturoalvarez/ryu-ofctl:5.0 .
+docker push arturoalvarez/ryu-ofctl:5.0
 ```
 
-## Ryu REST API
+## Ryu REST
 
 ```bash
-docker build -f Dockerfile.ryu-rest -t arturoalvarez/ryu-rest:3.0 .
-docker push arturoalvarez/ryu-rest:3.0
+docker build -f ./ryu-k3s-imagenes/Dockerfile.ryu-rest -t arturoalvarez/ryu-rest:5.0 .
+docker push arturoalvarez/ryu-rest:5.0
+```
+## Ryu SWITCH
+
+```bash
+docker build -f ./ryu-k3s-imagenes/Dockerfile.ryu-switch -t arturoalvarez/ryu-switch:5.0 .
+docker push arturoalvarez/ryu-switch:5.0
 ```
 
-## Ryu GUI Topology
+## Ryu TOPOLOGY
 
 ```bash
-docker build -f Dockerfile.ryu-gui -t arturoalvarez/ryu-gui:1.0 .
-docker push arturoalvarez/ryu-gui:1.0
+docker build -f ./ryu-k3s-imagenes/Dockerfile.ryu-topology -t arturoalvarez/ryu-topology:5.0 .
+docker push arturoalvarez/ryu-topology:5.0
 ```

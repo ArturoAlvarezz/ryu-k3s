@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Clonar e instalar Ryu desde el repositorio oficial
 WORKDIR /opt
-RUN git clone https://github.com/faucetsdn/ryu.git
+RUN git clone https://github.com/ArturoAlvarezz/ryu-k8s.git ./ryu
 RUN pip install ./ryu
 
 # Puerto de la API REST
