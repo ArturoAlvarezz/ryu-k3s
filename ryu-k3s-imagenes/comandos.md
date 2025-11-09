@@ -16,8 +16,9 @@ docker push arturoalvarez/ryu-rest:5.0
 ## Ryu SWITCH
 
 ```bash
-docker build -f ./ryu-k3s-imagenes/Dockerfile.ryu-switch -t arturoalvarez/ryu-switch:5.0 .
-docker push arturoalvarez/ryu-switch:5.0
+docker build -f ./ryu-k3s-imagenes/Dockerfile.ryu-switch -t arturoalvarez/ryu-switch:5.2 .
+docker push arturoalvarez/ryu-switch:5.2
+udo docker save arturoalvarez/ryu-switch:5.2 | sudo k3s ctr images import -
 ```
 
 ## Ryu TOPOLOGY

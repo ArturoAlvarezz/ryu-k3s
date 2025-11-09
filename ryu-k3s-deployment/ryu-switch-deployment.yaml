@@ -7,7 +7,7 @@ metadata:
     app: ryu-switch
     component: controller
 spec:
-  replicas: 3  # Múltiples controladores OpenFlow
+  replicas: 4  # Múltiples controladores OpenFlow
   selector:
     matchLabels:
       app: ryu-switch
@@ -32,7 +32,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: ryu-switch
-          image: docker.io/arturoalvarez/ryu-switch:1.0
+          image: docker.io/arturoalvarez/ryu-switch:5.2
+          imagePullPolicy: IfNotPresent
           command: ["ryu-manager"]
           args:
             [
@@ -42,7 +43,7 @@ spec:
             ]
           env:
             - name: REDIS_HOST
-              value: "redis-svc"
+              value: "redis-svc.ryu.svc.cluster.local"
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_DB
@@ -63,20 +64,6 @@ spec:
             - containerPort: 6633
               name: openflow
               protocol: TCP
-          livenessProbe:
-            tcpSocket:
-              port: 6633
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          readinessProbe:
-            tcpSocket:
-              port: 6633
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 3
-            failureThreshold: 2
           resources:
             requests:
               memory: "256Mi"

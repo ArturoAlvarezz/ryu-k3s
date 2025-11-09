@@ -32,7 +32,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: ryu-ofctl
-          image: docker.io/arturoalvarez/ryu-ofctl:1.0
+          image: docker.io/arturoalvarez/ryu-ofctl:5.0
+          imagePullPolicy: IfNotPresent
           command: ["ryu-manager"]
           args:
             [

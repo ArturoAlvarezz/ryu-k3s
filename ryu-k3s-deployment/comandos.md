@@ -23,3 +23,9 @@ sudo kubectl apply -f ./ryu-k3s-deployment/ryu-ofctl-deployment.yaml
 ```bash
 sudo kubectl apply -f ./ryu-k3s-deployment/ryu-topology-deployment.yaml
 ``` 
+
+## Despliegue de Ryu-REST
+
+```bash
+sudo kubectl apply -f ./ryu-k3s-deployment/ryu-rest-deployment.yaml
+```

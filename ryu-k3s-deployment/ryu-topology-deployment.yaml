@@ -7,7 +7,7 @@ metadata:
     app: ryu-topology
     component: gui
 spec:
-  replicas: 2  # GUI con réplicas
+  replicas: 4  # GUI con réplicas
   selector:
     matchLabels:
       app: ryu-topology
@@ -32,7 +32,8 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: ryu-topology
-          image: docker.io/arturoalvarez/ryu-topology:1.0
+          image: docker.io/arturoalvarez/ryu-topology:5.0
+          imagePullPolicy: IfNotPresent
           command: ["ryu-manager"]
           args:
             [
